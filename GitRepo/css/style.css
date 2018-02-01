@@ -1,0 +1,15 @@
+body {
+  background-color: #F9FFFF;
+}
+background-image:url(/image/homepage.jpg);
+h1 {
+  font-family: 'Roboto', serif;
+  color: black;
+  font-size: 48px;
+  text-align: center;
+}
+p {
+  font-family: 'Roboto', serif;
+  color: grey;
+  text-align: center;
+}
