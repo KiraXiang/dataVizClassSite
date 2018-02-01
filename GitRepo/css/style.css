@@ -1,15 +1,29 @@
 body {
   background-color: #F9FFFF;
+  background-image: image(01.jpg);
 }
-background-image:url(/image/homepage.jpg);
 h1 {
   font-family: 'Roboto', serif;
   color: black;
   font-size: 48px;
-  text-align: center;
+  text-align: left;
 }
 p {
-  font-family: 'Roboto', serif;
+  font-family: 'Roboto',serif;
   color: grey;
-  text-align: center;
+  text-align: left;
 }
+.words{
+  font-family: 'Roboto',serif;
+  color: white;
+  font-size: 25px;
+  text-align: left;
+  position:absolute;
+  top:30%;
+  left:10%;
+  right:10%;
+  z-index: 15;
+  background:#000000;
+  opacity: 0.7
+  }
+.imageword{position: relative;}
