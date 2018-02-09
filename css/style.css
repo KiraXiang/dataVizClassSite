@@ -28,18 +28,6 @@ p {
   }
 .imageword{position: relative;}
 
-.words01{
-  font-family: 'Roboto',serif;
-  color: white;
-  font-size: 25px;
-  text-align: left;
-  position:absolute;
-  top:30%;
-  left:10%;
-  right:10%;
-  }
-.imageword01{position: relative;}
-
 h2 {
   font-family: 'Roboto', serif;
   color: black;
