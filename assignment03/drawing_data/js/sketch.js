@@ -13,7 +13,7 @@ var Year = [1765, 1790, 1815, 1840, 1865, 1890, 1915, 1940, 1965, 1990, 2015];
 
 //loading the table
 function preload(){
-  BuildingTable = loadTable('../data/MN2017V11.csv', 'csv', 'header');
+  BuildingTable = loadTable('drawing_data/data/MN2017V11.csv', 'csv', 'header');
   console.log('table has been loaded...');
 }
 
@@ -21,8 +21,9 @@ function preload(){
 function setup() {
   createCanvas(800, 800);
   textFont('Roboto');
-  print(BuildingTable.getRowCount());
-  print(BuildingTable.getColumnCount());
+  print('is this working?????');
+  // print(BuildingTable.getRowCount());
+  // print(BuildingTable.getColumnCount());
   textAlign(LEFT, TOP);
   textSize(14);
   console.log('Setup complete...');
