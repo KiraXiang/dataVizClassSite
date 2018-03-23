@@ -1,19 +1,19 @@
 // ***** Global variables ***** //
 var BuildingTable;
-var topY = 50;
-var bottomY = 500;
+var topY = 100;
+var bottomY = 400;
 var leftX = 50;
-var rightX = 700;
+var rightX = 750;
 var textLeft = 30;
-var buttonLabels = ['All Movies', '10M+ Budget', '< 10M Budget'];
+var buttonLabels = ['All Buildings', '< 10 floor', '10-29 floor', '30-49 floor', '50-69 floor', '70-89 floor', '90-109 floor', '110-120 floor'];
 var buttonStartX = 320;
 var buttonStartY = 15;
 var buttonLength = 120;
 var buttonHeight = 20;
 var buttonSpacing = 10;
 var selectedButton = 0;
-var topBudget = new p5.Table;
-var bottomBudget = new p5.Table;
+var topBuilding = new p5.Table;
+var bottomBuilding = new p5.Table;
 
 // ***** Preload function ***** //
 function preload(){
@@ -37,7 +37,7 @@ function setup(){
 function drawLabels() {
   fill(0);
   textAlign(LEFT, CENTER);
-  text("AVERAGE RATING OF SELECTED MOVIES", textLeft - 15, topY - 25);
+  text("AVERAGE FLOOR OF SELECTED BUILDINGS", textLeft - 15, topY - 25);
   textAlign(RIGHT, CENTER);
   for (var i = 0; i < 11; i++) {
     noStroke();

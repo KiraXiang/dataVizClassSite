@@ -41,17 +41,17 @@ for (var i = 0; i < BuildingTable.getRowCount(); i++) {
   ellipse(positionX, positionY, 3, 3);
 }
 //Drawing the tendency line
-for (var i = 0; i < BuildingTable.getRowCount(); i++) {
-  for (var j = 0; j < BuildingTable.getRowCount(); j++) {
-    var medianfloor = BuildingTable.getNum(i, 'Median');
-    var year = BuildingTable.getString(j, 'Year');
-    var positionX1 = map(year, j, j + 1, startX, endX);
-    var positionY1 = map(medianfloor, i, i + 1, startY, endY);
-    var positionX2 = map(year, j + 1, j + 2, startX, endX);
-    var positionY2 = map(medianfloor, i + 1, i + 2, startY, endY);
-    line(positionX1, positionY1, positionX2, positionY2);
-  }
-  }
+//for (var i = 0; i < BuildingTable.getRowCount(); i++) {
+  //for (var j = 0; j < BuildingTable.getRowCount(); j++) {
+    //var medianfloor = BuildingTable.getNum(i, 'Median');
+    //var year = BuildingTable.getString(j, 'Year');
+    //var positionX1 = map(year, j, j + 1, startX, endX);
+    //var positionY1 = map(medianfloor, i, i + 1, startY, endY);
+    //var positionX2 = map(year, j + 1, j + 2, startX, endX);
+    //var positionY2 = map(medianfloor, i + 1, i + 2, startY, endY);
+    //line(positionX1, positionY1, positionX2, positionY2);
+  //}
+  //}
 // Drawing the year labels
 fill(20);
   for (var i = 0; i < Year.length; i++) {
