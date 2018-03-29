@@ -52,7 +52,68 @@
       <h2>Midterm Critiques</h2>
       <h3>A World of Terror</h3>
       <img src="/image/critique.png" alt="" width=“100%”>
-      <p>The data visualization example I pick is ‘A World of Terror’ created by. This interactive visualization integrates all the information of the killed, the wounded and the number of the terrorist incidents every year from 1970 to 2013. Categorized into different terrorist groups, the graph precisely shows the historic activity changes of each terrorist group in each month as well as the impact of the year. Also, the tabs on the top can switch the ranking of the groups according to different criteria, which provides readers with various ways to explore the data themselves. <br/>
-      With the number of floors as the x-axis and the built year as the y-axis, this diagram shows the trace of height changes of the buildings in Manhattan from 1765 to 2017. Each dot in the diagram represents one building in Manhattan. Over the last 250 years, the height of the buildings in Manhattan has skyrocketed. The number of floors has raised from 3-4 floors to more than 100.</p>
+      <p>‘A World of Terror’ is created by Periscopic, a socially-conscious data visualization firm, to explore the reach, frequency and impact of terrorism around the world. As an information visualization, a mapping between discrete data and a visual representation(Manovich, 2011), this interactive graphical work integrates comprehensive data of the number of the terrorist attacks, the killed, and the wounded at incident level every year from 1970 to 2013, which is collected from National Consortium for the Study of Terrorism and Responses to Terrorism’s (START) Global Terrorism Database (GTD).
+      <br/>
+      <br/>
+      Categorized into 25 most influential terrorist groups, the graph precisely shows the historic activity changes of each group in every month as well as the impact of the year. The red histogram shows the people killed in the activities of the groups while the yellow shows the wounded. Between these two, the grey matrix presents the number of incidents they held for each month. By clicking on the graphs of each group, the basic introduction of the selected group as well as the geographic distribution of their activities will be shown on the map on the left top. Also, the tabs on the right top can switch the ranking of the groups according to different criteria, such as organizations with the long history, the recent activity, most victims, and widest geographic spread, which provides users with various ways to explore the data themselves. The users can also get the data from a certain period they are interested in by dragging the bar on the timeline to locate themselves on specific time points.
+      <br/>
+      <br/>
+      Such a complicated project must convey tons of information with it. Thus, how to tell the story behind the data precisely and efficiently to the audience is the most important task for the designers to handle with.
+      <br/>
+      <br/>
+      </p>
+
+      <h4>Data Exploration</h4>
+      <p>Given the enormous information of 3,065 terrorist groups from the record of GTD, the designers need to clean up the data and simplify the graph by selecting the top 25 organizations for visualization. To determine the most influential organizations, they identified the ones with the most recorded kills, wounded, and incidents. When counting the number of incidents, they carefully made sure that all actions are accounted for, including those causing no wound or death. After merging the three records, the designers generated a list of the final organizations. Most of the organizations were in top 30 of each record. Though the 25 organizations only accounted for less than 1% of the total, they have conducted over 26% of the total activities.
+      <br/>
+      <br/>
+      Also, the evolution of the terrorist organizations has caused difficulties in compiling the data into different groups. Many organizations evolve and change names, dissolve or split into subgroups through the long history. For the specific groups, the designers worked with the professionals from the START and combined the historic data of several groups into the ones commonly known nowadays. For example, ISIS has gone through name changes of Tawhid and Jihad, Al-Qa’ida in Iraq, Islamic State of Iraq, and Islamic State of Iraq and the Levant.
+      <br/>
+      <br/>
+      When further analyzing the datasets, the designers wondered if there existed any tendency that the terrorist groups may favor certain tactic, target or weapon to commit the attacks. The terrorist signature here may be used for prediction and prevention as a sign of certain types of terrorist attacks. However, it turned out that what weapons and strategies the groups would take might depend on the practical situation at the time, such as the accessibility to the resources, the people involved in the organization, etc. Therefore, it didn’t become a criterion of the group sequence list.
+      <br/>
+      <br/>
+      Surprisingly, despites Europe and Middle East as the concentrations of terrorist attacks, Central and South America are also highly exposed to such activities in the long history. However, the incidents in these areas are seldom reported in the news and even overlooked by the international society. The designers thus decided to include the geographic dispersal as one of the sorting criteria.
+      <br/>
+      <br/>
+      </p>
+
+      <h4>Graphic Design</h4>
+      <p> After understanding the datasets thoroughly, the designers have decided to make an interactive visualization with comparison information to let the data speak for itself and to allow the users to discover the insights for their own interests and purposes. They chose a set of small multiple graphics that present five data points: number of killed, number of wounded, number of incidents, year, and month. The challenge here is to pick up the graphic design which best conveys the datasets precisely and concisely and interprets the information efficiently.
+      <br/>
+      <br/>
+      At first, the designers tried to encode the data around an arc with data points radiating outward, which could integrate the large amount of information in one graph. However, they found it later on that it was difficult to distinguish volume and make comparisons by this format. Then, they changed it to the histogram showing the killed and the wounded, which better visualized the comparisons among different years. And they also figured out a way to combine the number of incidents by placing them into the squares in a matrix with different color depths. The darker the color is, the more incidents were. Finally, they decided to use the last one in the following draft sets.
+      <br/>
+      <br/>
+      <img src="/image/draft.jpg" alt="" width=“100%”>
+      </p>
+
+      <h4>Limitation</h4>
+      <p> Given the special history theme of the interactive project, the practical goal of the graph should be the need or desire to see phenomena and relationships in new or different ways(Friendly, 2008). From this perspective, the project has done a good job as it merged information well in one graph. Despites the obvious advantages it has, there still exist some limitations of the expression.
+      <br/>
+      <br/>
+      A good design has two key elements, simplicity of design and complexity of data(Tufte, 2008). It means no matter how complicated the data is behind it, the graph itself should always be easy to understand and the information be convenient to extract. However, the form of the visualization is a little too complicated for the readers to understand as it contains tons of information beyond the capability of the audience at the first glance. The most difficult part is to know the meaning of the combined histogram and matrix of the killed, wounded and the number of the incidents, as the legends are plied together and it takes time to understand the time scale of the incidents.
+      <br/>
+      <br/>
+      Furthermore, with the year as the x-axis and months as the y-axis, the matrix of incidents is too small for the readers to navigate in the specific month. And when the mouse sweeps across the matrix, the information of the time point will pop up only with the year. It would be better if the month is also included in the small statistical window.
+      <br/>
+      <br/>
+      Also, the names of the terrorist groups have problem showing entirely. The last line is always half displayed, which may result in the aesthetic discomfort of the audience.
+      <br/>
+      <br/>
+      The project could be improved if the histograms and matrix are exploded and developed into two different graphs, which can make the information more precisely conveyed. And more careful consideration can be made for the interactivity to show the detailed information to the audience.
+      </p>
+
+      <h4>Reference</h4>
+      <p>Friendly, M. (2008). A Brief History of Data Visualization. Handbook of Data Visualization, 15–56 (1–43). https://doi.org/10.1007/978-3-540-33037-0_2
+      <br/>
+      <br/>
+      Manovich, L. (2011). What is Visualization? Visual Studies, (May).
+      <br/>
+      <br/>
+      Tufte, E. R. (2008). The visual display of quantitative Information. The Visual Display of Quantitative Information. https://doi.org/10.1198/tech.2002.s78
+      <br/>
+      <br/>
+      </p>
 
       <a href="http://terror.periscopic.com/">See more of the project</a>
