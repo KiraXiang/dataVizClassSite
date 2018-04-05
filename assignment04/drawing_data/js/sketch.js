@@ -3,27 +3,28 @@ var BuildingTable;
 var topY = 100;
 var bottomY = 400;
 var leftX = 50;
-var rightX = 750;
+var rightX = 1150;
 var textLeft = 30;
-var buttonLabels = ['All Buildings', '< 10 floor', '10-29 floor', '30-49 floor', '50-69 floor', '70-89 floor', '90-109 floor', '110-120 floor'];
-var buttonStartX = 320;
+var buttonLabels = ['All Buildings', '< 40 Floor', '40-79 Floor', '80-120 Floor'];
+var buttonStartX = 0;
 var buttonStartY = 15;
 var buttonLength = 120;
 var buttonHeight = 20;
 var buttonSpacing = 10;
 var selectedButton = 0;
-var topBuilding = new p5.Table;
-var bottomBuilding = new p5.Table;
+var topfloor = new p5.Table;
+var midfloor = new p5.Table;
+var bottomfloor = new p5.Table;
 
 // ***** Preload function ***** //
 function preload(){
-  BuildingTable = loadTable('data/MN2017V11.csv', 'csv', 'header');
+  BuildingTable = loadTable('drawing_data/data/MN2017V11.csv', 'csv', 'header');
   console.log('Done loading table...');
 }
 
 // ***** Setup function ***** //
 function setup(){
-  createCanvas(800, 800);
+  createCanvas(1200, 1200);
   textSize(12);
   textFont('Roboto');
   console.log('Setup complete...');
@@ -37,96 +38,148 @@ function setup(){
 function drawLabels() {
   fill(0);
   textAlign(LEFT, CENTER);
-  text("AVERAGE FLOOR OF SELECTED BUILDINGS", textLeft - 15, topY - 25);
+  text("FLOOR OF SELECTED BUILDINGS", textLeft - 15, topY - 25);
   textAlign(RIGHT, CENTER);
-  for (var i = 0; i < 11; i++) {
+  for (var i = 0; i < 121; i+=20) {
     noStroke();
-    text(i, textLeft, map(i, 0, 10, bottomY, topY));
+    text(i, textLeft, map(i, 0, 120, bottomY, topY));
     stroke(200);
-    line(textLeft + 10, map(i, 0, 10, bottomY, topY), rightX + 10, map(i, 0, 10, bottomY, topY));
+    line(textLeft + 10, map(i, 0, 120, bottomY, topY), rightX + 10, map(i, 0, 120, bottomY, topY));
   }
   textAlign(CENTER, CENTER);
-  for (var i = 1900; i < 2021; i+=20) {
+  for (var i = 1765; i < 2016; i+=10) {
     noStroke();
-    text(i, map(i, 1900, 2020, leftX, rightX), bottomY + 25);
+    text(i, map(i, 1765, 2015, leftX, rightX), bottomY + 25);
     stroke(200);
-    line(map(i, 1900, 2020, leftX, rightX), bottomY + 12, map(i, 1900, 2020, leftX, rightX), bottomY + 5);
+    line(map(i, 1765, 2015, leftX, rightX), bottomY + 12, map(i, 1765, 2015, leftX, rightX), bottomY + 5);
   }
 }
 
-// ***** Create new table function ******* //
 function createNewTable(){
-  topBudget.addColumn('release_date');
-  topBudget.addColumn('vote_average');
-  bottomBudget.addColumn('release_date');
-  bottomBudget.addColumn('vote_average');
-  for (var i = 0; i < moviesTable.getRowCount(); i++) {
-    var budget = moviesTable.getNum(i, 'budget');
-    if (budget >= 10000000) {
-      var newRow = topBudget.addRow();
-      newRow.setString('release_date', moviesTable.getString(i, 'release_date'));
-      newRow.setNum('vote_average', moviesTable.getNum(i, 'vote_average'));
+  topfloor.addColumn('YearBuilt');
+  topfloor.addColumn('NumFloors');
+  midfloor.addColumn('YearBuilt');
+  midfloor.addColumn('NumFloors');
+  bottomfloor.addColumn('YearBuilt');
+  bottomfloor.addColumn('NumFloors');
+  for (var i = 0; i < BuildingTable.getRowCount(); i++) {
+    var floor = BuildingTable.getNum(i, 'NumFloors');
+    if (floor >= 80) {
+      var newRow = topfloor.addRow();
+      newRow.setString('YearBuilt', BuildingTable.getString(i, 'YearBuilt'));
+      newRow.setNum('NumFloors', BuildingTable.getNum(i, 'NumFloors'));
+        }
+        else if (floor >= 40 && floor < 80) {
+          var newRow = midfloor.addRow();
+          newRow.setString('YearBuilt', BuildingTable.getString(i, 'YearBuilt'));
+          newRow.setNum('NumFloors', BuildingTable.getNum(i, 'NumFloors'));
+        }
+        else {
+          var newRow = bottomfloor.addRow();
+          newRow.setString('YearBuilt', BuildingTable.getString(i, 'YearBuilt'));
+          newRow.setNum('NumFloors', BuildingTable.getNum(i, 'NumFloors'));
+        }
+      }
+      print('New tables created...');
     }
-    else {
-      var newRow = bottomBudget.addRow();
-      newRow.setString('release_date', moviesTable.getString(i, 'release_date'));
-      newRow.setNum('vote_average', moviesTable.getNum(i, 'vote_average'));
-    }
-  }
-  print('New tables created...');
-}
 
-// ***** Draw movies function ***** //
-function drawMovies(){
+
+
+// ***** Draw Buildings function ***** //
+function drawBuildings(){
   if (selectedButton == 0) {
     fill(0);
     noStroke();
-    for (var i = 0; i < moviesTable.getRowCount(); i++) {
-      var date = moviesTable.getString(i, 'release_date').split('-')[0];
-      var year = parseInt(date);
-      var yearPosition = map(year, 1900, 2020, leftX, rightX);
-      var scorePosition = map(moviesTable.getNum(i, 'vote_average'), 0, 10, bottomY, topY);
-      ellipse(yearPosition, scorePosition, 3, 3);
+    for (var i = 0; i < BuildingTable.getRowCount(); i++) {
+      var year = BuildingTable.getString(i, 'YearBuilt');
+      var yearPosition = map(year, 1765, 2015, leftX, rightX);
+      var floorPosition = map(BuildingTable.getNum(i, 'NumFloors'), 0, 120, bottomY, topY);
+      ellipse(yearPosition, floorPosition, 3, 3);
+      text('There are ' + BuildingTable.getRowCount() + ' buildings in Manhattan.', 120, 50);
     }
   }
   else if (selectedButton == 1){
-    fill(220);
-    noStroke();
-    for (var i = 0; i < bottomBudget.getRowCount(); i++) {
-      var date = bottomBudget.getString(i, 'release_date').split('-')[0];
-      var year = parseInt(date);
-      var yearPosition = map(year, 1900, 2020, leftX, rightX);
-      var scorePosition = map(bottomBudget.getNum(i, 'vote_average'), 0, 10, bottomY, topY);
-      ellipse(yearPosition, scorePosition, 3, 3);
-    }
     fill(255, 0, 0);
     noStroke();
-    for (var i = 0; i < topBudget.getRowCount(); i++) {
-      var date = topBudget.getString(i, 'release_date').split('-')[0];
-      var year = parseInt(date);
-      var yearPosition = map(year, 1900, 2020, leftX, rightX);
-      var scorePosition = map(topBudget.getNum(i, 'vote_average'), 0, 10, bottomY, topY);
+    for (var i = 0; i < bottomfloor.getRowCount(); i++) {
+      var year = bottomfloor.getString(i, 'YearBuilt');
+      var yearPosition = map(year, 1765, 2015, leftX, rightX);
+      var floorPosition = map(bottomfloor.getNum(i, 'NumFloors'), 0, 120, bottomY, topY);
+      ellipse(yearPosition, floorPosition, 3, 3);
+      fill(0);
+      text('There are ' + bottomfloor.getRowCount() + ' buildings less than 40 floors in Manhattan.', 120, 50);
+    }
+    fill(220);
+    noStroke();
+    for (var i = 0; i < midfloor.getRowCount(); i++) {
+      var year = midfloor.getString(i, 'YearBuilt');
+      var yearPosition = map(year, 1765, 2015, leftX, rightX);
+      var scorePosition = map(midfloor.getNum(i, 'NumFloors'), 0, 120, bottomY, topY);
+      ellipse(yearPosition, scorePosition, 3, 3);
+    }
+    fill(220);
+    noStroke();
+    for (var i = 0; i < topfloor.getRowCount(); i++) {
+      var year = topfloor.getString(i, 'YearBuilt');
+      var yearPosition = map(year, 1765, 2015, leftX, rightX);
+      var scorePosition = map(topfloor.getNum(i, 'NumFloors'), 0, 120, bottomY, topY);
       ellipse(yearPosition, scorePosition, 3, 3);
     }
   }
-  else {
+  else if (selectedButton == 2){
     fill(220);
     noStroke();
-    for (var i = 0; i < topBudget.getRowCount(); i++) {
-      var date = topBudget.getString(i, 'release_date').split('-')[0];
-      var year = parseInt(date);
-      var yearPosition = map(year, 1900, 2020, leftX, rightX);
-      var scorePosition = map(topBudget.getNum(i, 'vote_average'), 0, 10, bottomY, topY);
+    for (var i = 0; i < bottomfloor.getRowCount(); i++) {
+      var year = bottomfloor.getString(i, 'YearBuilt');
+      var yearPosition = map(year, 1765, 2015, leftX, rightX);
+      var floorPosition = map(bottomfloor.getNum(i, 'NumFloors'), 0, 120, bottomY, topY);
+      ellipse(yearPosition, floorPosition, 3, 3);
+    }
+    fill(255, 0, 0);
+    noStroke();
+    for (var i = 0; i < midfloor.getRowCount(); i++) {
+      var year = midfloor.getString(i, 'YearBuilt');
+      var yearPosition = map(year, 1765, 2015, leftX, rightX);
+      var scorePosition = map(midfloor.getNum(i, 'NumFloors'), 0, 120, bottomY, topY);
+      ellipse(yearPosition, scorePosition, 3, 3);
+      fill(0);
+      text('There are ' + midfloor.getRowCount() + ' buildings between 40-79 floors in Manhattan.', 120, 50);
+    }
+    fill(220);
+    noStroke();
+    for (var i = 0; i < topfloor.getRowCount(); i++) {
+      var year = topfloor.getString(i, 'YearBuilt');
+      var yearPosition = map(year, 1765, 2015, leftX, rightX);
+      var scorePosition = map(topfloor.getNum(i, 'NumFloors'), 0, 120, bottomY, topY);
+      ellipse(yearPosition, scorePosition, 3, 3);
+    }
+  }
+  else{
+    fill(220);
+    noStroke();
+    for (var i = 0; i < bottomfloor.getRowCount(); i++) {
+      var year = bottomfloor.getString(i, 'YearBuilt');
+      var yearPosition = map(year, 1765, 2015, leftX, rightX);
+      var floorPosition = map(bottomfloor.getNum(i, 'NumFloors'), 0, 120, bottomY, topY);
+      ellipse(yearPosition, floorPosition, 3, 3);
+    }
+    fill(220);
+    noStroke();
+    for (var i = 0; i < midfloor.getRowCount(); i++) {
+      var year = midfloor.getString(i, 'YearBuilt');
+      var yearPosition = map(year, 1765, 2015, leftX, rightX);
+      var scorePosition = map(midfloor.getNum(i, 'NumFloors'), 0, 120, bottomY, topY);
       ellipse(yearPosition, scorePosition, 3, 3);
     }
     fill(255, 0, 0);
     noStroke();
-    for (var i = 0; i < bottomBudget.getRowCount(); i++) {
-      var date = bottomBudget.getString(i, 'release_date').split('-')[0];
-      var year = parseInt(date);
-      var yearPosition = map(year, 1900, 2020, leftX, rightX);
-      var scorePosition = map(bottomBudget.getNum(i, 'vote_average'), 0, 10, bottomY, topY);
+    for (var i = 0; i < topfloor.getRowCount(); i++) {
+      var year = topfloor.getString(i, 'YearBuilt');
+      var yearPosition = map(year, 1765, 2015, leftX, rightX);
+      var scorePosition = map(topfloor.getNum(i, 'NumFloors'), 0, 120, bottomY, topY);
       ellipse(yearPosition, scorePosition, 3, 3);
+      fill(0);
+      text('There are ' + topfloor.getRowCount() + ' buildings more than 80 floors in Manhattan.', 120, 50);
     }
   }
 }
@@ -153,7 +206,7 @@ function drawButtons(){
 function draw(){
   background(255);
   drawLabels();
-  drawMovies();
+  drawBuildings();
   drawButtons();
 }
 
@@ -167,8 +220,12 @@ function mousePressed(){
     selectedButton = 1;
     redraw();
   }
-  else if (mouseX >= (buttonStartX + buttonLength + buttonSpacing) && mouseX <= (buttonStartX + buttonLength * 3 + buttonSpacing * 2) && mouseY >= buttonStartY && mouseY <= (buttonStartY + buttonHeight)){
+  else if (mouseX >= (buttonStartX + buttonLength * 2 + buttonSpacing) && mouseX <= (buttonStartX + buttonLength * 3 + buttonSpacing * 2) && mouseY >= buttonStartY && mouseY <= (buttonStartY + buttonHeight)){
     selectedButton = 2;
+    redraw();
+  }
+  else if (mouseX >= (buttonStartX + buttonLength * 3 + buttonSpacing * 2) && mouseX <= (buttonStartX + buttonLength * 4 + buttonSpacing * 3) && mouseY >= buttonStartY && mouseY <= (buttonStartY + buttonHeight)){
+    selectedButton = 3;
     redraw();
   }
 }
