@@ -49,6 +49,16 @@ function getWeatherData(apiData){
   redraw();
 }
 
+
+// **** Converting Time **** //
+    function timestampToTime(sunrise){
+      var date = new Date(sunrise * 1000);
+      h = date.getHours() + ':';
+      m = date.getMinutes();
+      return h+m;
+    }
+
+
 // **** Draw Function **** //
 function draw(){
   background(225);
